@@ -68,8 +68,30 @@ console.log(a, b);
 
 const arr = [7, 8, 9];
 const badNewArr = [1, 2, ...arr];
-console.log(badNewArr);
+console.log(...badNewArr);
 
+console.log("-----------------------");
+
+const str = "jonas";
+const letters = [...str, " ", "s."];
+console.log(...letters);
+console.log(...str);
+
+// const ingredients = [
+//   // prompt("Let's make pasta!Ingredient 1?"),
+//   // prompt("Ingredient 2?"),
+// ];
+// console.log(ingredients);
+
+// restaurant.orderDelivery(...ingredients);
+
+const newRestaurant = { foundedIn: 1987, ...restaurant, founder: "me" };
+console.log(newRestaurant);
+
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = "me";
+console.log(restaurant.name);
+console.log(restaurantCopy.name);
 // const [start, mainCourse] = restaurant.order(2, 0);
 // console.log(start, mainCourse);
 
