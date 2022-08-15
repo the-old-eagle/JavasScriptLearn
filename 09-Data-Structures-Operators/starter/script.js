@@ -44,38 +44,38 @@ restaurant.orderDelivery({
   starterIndex: 2,
 });
 
-const { name, openingHours, categories } = restaurant;
-console.log(name, openingHours, categories);
-console.log("---------------");
+// const { name, openingHours, categories } = restaurant;
+// console.log(name, openingHours, categories);
+// console.log("---------------");
 
-const {
-  name: restaurantName,
-  openingHours: hours,
-  categories: tags,
-} = restaurant;
-console.log(restaurantName, hours, tags);
+// const {
+//   name: restaurantName,
+//   openingHours: hours,
+//   categories: tags,
+// } = restaurant;
+// console.log(restaurantName, hours, tags);
 
-const { menu = [], starterMenu: starters = [] } = restaurant;
-console.log(menu, starters);
+// const { menu = [], starterMenu: starters = [] } = restaurant;
+// console.log(menu, starters);
 
-let a = 111;
-let b = 999;
-const obj = { a: 23, b: 4, c: 14 };
-({ a, b } = obj);
-obj.a = b;
-console.log(obj.a);
-console.log(a, b);
+// let a = 111;
+// let b = 999;
+// const obj = { a: 23, b: 4, c: 14 };
+// ({ a, b } = obj);
+// obj.a = b;
+// console.log(obj.a);
+// console.log(a, b);
 
-const arr = [7, 8, 9];
-const badNewArr = [1, 2, ...arr];
-console.log(...badNewArr);
+// const arr = [7, 8, 9];
+// const badNewArr = [1, 2, ...arr];
+// console.log(...badNewArr);
 
-console.log("-----------------------");
+// console.log("-----------------------");
 
-const str = "jonas";
-const letters = [...str, " ", "s."];
-console.log(...letters);
-console.log(...str);
+// const str = "jonas";
+// const letters = [...str, " ", "s."];
+// console.log(...letters);
+// console.log(...str);
 
 // const ingredients = [
 //   // prompt("Let's make pasta!Ingredient 1?"),
@@ -85,13 +85,27 @@ console.log(...str);
 
 // restaurant.orderDelivery(...ingredients);
 
-const newRestaurant = { foundedIn: 1987, ...restaurant, founder: "me" };
-console.log(newRestaurant);
+// const newRestaurant = { foundedIn: 1987, ...restaurant, founder: "me" };
+// console.log(newRestaurant);
 
-const restaurantCopy = { ...restaurant };
-restaurantCopy.name = "me";
-console.log(restaurant.name);
-console.log(restaurantCopy.name);
+// const restaurantCopy = { ...restaurant };
+// restaurantCopy.name = "me";
+// console.log(restaurant.name);
+// console.log(restaurantCopy.name);
+
+// console.log("...................");
+// const [m, n, ...others] = [1, 2, 3, 4, 5];
+// console.log(m, n, others);
+
+// const [Pizza, , Risotto, ...otherFood] = [
+//   ...restaurant.mainMenu,
+//   ...restaurant.starterMenu,
+// ];
+// console.log(Pizza, Risotto, otherFood);
+
+// const { sat, ...weekdays } = restaurant.openingHours;
+// console.log(weekdays);
+
 // const [start, mainCourse] = restaurant.order(2, 0);
 // console.log(start, mainCourse);
 
@@ -105,3 +119,10 @@ console.log(restaurantCopy.name);
 
 // const [p, q, r = 9] = [1, 2];
 // console.log(p, q, r);
+
+const add = function (...numbers) {
+  console.log(numbers);
+};
+add(1);
+add(2, 3);
+add(4, 5, 6);
