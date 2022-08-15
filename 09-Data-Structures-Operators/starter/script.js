@@ -43,6 +43,4 @@ const game = {
 
 // 为每个队伍创建一个数组
 const players1 = [...game.players[0]];
-const players2 = [];
-
-console.log(...players1);
+const players2 = [...game.players[1]];
