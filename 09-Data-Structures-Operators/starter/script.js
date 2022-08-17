@@ -42,17 +42,33 @@ const game = {
 };
 
 // 为每个队伍创建一个数组
-const players1 = [...game.players[0]];
-const players2 = [...game.players[1]];
 
+const [players1, players2] = game.players;
+console.log(players1);
+
+// 创建守门员变量‘gk’和剩下的成员变量数组fieldPlayers
 const [gk, ...fieldPlayers] = players1;
-console.log(fieldPlayers);
 
+// 创建包含所有成员的数组allPlayers
 const allPlayers = [...players1, ...players2];
-console.log(allPlayers);
 
+// 创建额外三个替补的队伍1数组
 const players1Final = [...players1, "Thiago", "Coutinho", "Perisic"];
-console.log(players1Final);
 
-const [team1, draw, team2] = [game.odds];
-console.log(draw);
+// 嵌套解构，创建赔率等三个变量
+const {
+  odds: { team1, x: draw, team2 },
+} = game;
+
+// 传入任意数量的球员姓名，并将总人数作为得分数连同姓名一同打印到控制台
+const printGoals = function (...players) {
+  console.log(...players);
+  console.log(`${players.lngth} goals were scored`);
+};
+
+// 不用if-else，判断谁的赔率更低
+team1 < team2 && console.log("team 1 is more likely to win!");
+team1 > team2 && console.log("team 2 is more likely to win!");
+
+const menu = [...game.scored];
+for (const item of menu.entries()) console.log(item);
