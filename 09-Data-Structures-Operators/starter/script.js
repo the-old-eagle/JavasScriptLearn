@@ -44,3 +44,15 @@ const game = {
 // 为每个队伍创建一个数组
 const players1 = [...game.players[0]];
 const players2 = [...game.players[1]];
+
+const [gk, ...fieldPlayers] = players1;
+console.log(fieldPlayers);
+
+const allPlayers = [...players1, ...players2];
+console.log(allPlayers);
+
+const players1Final = [...players1, "Thiago", "Coutinho", "Perisic"];
+console.log(players1Final);
+
+const [team1, draw, team2] = [game.odds];
+console.log(draw);
