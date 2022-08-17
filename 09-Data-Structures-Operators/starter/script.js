@@ -1,78 +1,49 @@
 "use strict";
 
-const game = {
-  team1: "Bayern Munich",
-  team2: "Borrussia Dortmund",
-  players: [
-    [
-      "Neuer",
-      "Pavard",
-      "Martinez",
-      "Alaba",
-      "Davies",
-      "Kimmich",
-      "Goretzka",
-      "Coman",
-      "Muller",
-      "Gnarby",
-      "Lewandowski",
-    ],
-    [
-      "Burki",
-      "Schulz",
-      "Hummels",
-      "Akanji",
-      "Hakimi",
-      "Weigl",
-      "Witsel",
-      "Hazard",
-      "Brandt",
-      "Sancho",
-      "Gotze",
-    ],
-  ],
-  score: "4:0",
-  scored: ["Lewandowski", "Gnarby", "Lewandowski", "Hummels"],
-  date: "Nov 9th, 2037",
-  odds: {
-    team1: 1.33,
-    x: 3.25,
-    team2: 6.5,
+const weekdays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+const openingHours = {
+  [weekdays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [weekdays[5]]: {
+    open: 0, // Open 24 hours
+    close: 24,
   },
 };
 
-// 为每个队伍创建一个数组
+const restaurant = {
+  name: "Classico Italiano",
+  location: "Via Angelo Tavanti 23, Firenze, Italy",
+  categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
+  starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
+  mainMenu: ["Pizza", "Pasta", "Risotto"],
 
-const [players1, players2] = game.players;
-console.log(players1);
+  // ES6 enhanced object literals
+  openingHours,
 
-// 创建守门员变量‘gk’和剩下的成员变量数组fieldPlayers
-const [gk, ...fieldPlayers] = players1;
+  order(starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
 
-// 创建包含所有成员的数组allPlayers
-const allPlayers = [...players1, ...players2];
+  orderDelivery({ starterIndex = 1, mainIndex = 0, time = "20:00", address }) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
 
-// 创建额外三个替补的队伍1数组
-const players1Final = [...players1, "Thiago", "Coutinho", "Perisic"];
+  orderPasta(ing1, ing2, ing3) {
+    console.log(
+      `Here is your declicious pasta with ${ing1}, ${ing2} and ${ing3}`
+    );
+  },
 
-// 嵌套解构，创建赔率等三个变量
-const {
-  odds: { team1, x: draw, team2 },
-} = game;
-
-// 传入任意数量的球员姓名，并将总人数作为得分数连同姓名一同打印到控制台
-const printGoals = function (...players) {
-  console.log(...players);
-  console.log(`${players.lngth} goals were scored`);
+  orderPizza(mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 };
-
-// 不用if-else，判断谁的赔率更低
-team1 < team2 && console.log("team 1 is more likely to win!");
-team1 > team2 && console.log("team 2 is more likely to win!");
-
-const menu = [...game.scored];
-for (const item of menu.entries()) console.log(item);
-
-for (const [i, el] of menu.entries()) {
-  console.log(`${i + 1}: ${el}`);
-}
