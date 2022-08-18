@@ -48,25 +48,29 @@ const restaurant = {
   },
 };
 
-// 循环对象
-const properties = Object.keys(openingHours);
-console.log(properties);
+// 可选链式操作符练习
 
-let oprnStr = `We are open on ${properties.length} days:`;
-for (const day of properties) {
-  oprnStr += `${day},`;
+const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+
+// 检测属性是否存在
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? "closed";
+  console.log(`on ${day}, we open at ${open}`);
 }
-console.log(oprnStr);
 
-// 获取属性值
-const values = Object.values(openingHours);
-console.log(values);
+// 检测方法是否存在
+console.log(restaurant.order?.(0, 2) ?? "方法不存在");
+console.log(restaurant.orderMenu?.(0, 2) ?? "方法不存在");
 
-// 获取整个对象
-const entries = Object.entries(openingHours);
-// console.log(entries);
+const users = [{ name: "Jonas", email: "hello@jonas.io" }];
 
-// 对象可立即解构
-for (const [key, { open, close }] of entries) {
-  console.log(`on ${key} we open at ${open} and close at ${close}`);
+// 检测对象成员是否存在
+// 方式一
+console.log(users[0]?.name ?? "User array empty");
+
+// 方式二
+if (users.length > 0) {
+  console.log(users[0].name);
+} else {
+  console.log("user attay empty");
 }
