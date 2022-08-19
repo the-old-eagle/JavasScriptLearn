@@ -42,7 +42,7 @@ const game = {
 };
 
 //1.循环遍历game.scored数组
-const entries = Object.entries(game.scored);
+const entries = game.scored.entries();
 
 for (const [key, name] of entries) {
   console.log(`Goal ${key}: ${name}`);
@@ -50,12 +50,11 @@ for (const [key, name] of entries) {
 
 // 2.使用循环计算平均胜率
 let average = 0;
-const AvgEntries = Object.entries(game.odds);
-for (const [key, odd] of AvgEntries) {
+const aveValues = Object.values(game.odds);
+for (const odd of aveValues) {
   average += odd;
-  console.log(key, odd);
 }
-console.log(`三组胜率为${average / 3}`);
+console.log(`三组胜率为${average / aveValues.length}`);
 
 // // 为每个队伍创建一个数组
 
