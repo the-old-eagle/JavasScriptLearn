@@ -56,6 +56,12 @@ for (const odd of aveValues) {
 }
 console.log(`三组胜率为${average / aveValues.length}`);
 
+// 3.格式化输出三种胜率
+for(const [team,odd] of Object.entries(game.odds)){
+  console.log();
+  console.log();
+}
+
 // // 为每个队伍创建一个数组
 
 // const [players1, players2] = game.players;
