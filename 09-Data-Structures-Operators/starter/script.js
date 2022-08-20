@@ -60,6 +60,7 @@ console.log(`三组胜率为${average / aveValues.length}`);
 for(const [team,odd] of Object.entries(game.odds)){
   console.log();
   console.log();
+  
 }
 
 // // 为每个队伍创建一个数组
