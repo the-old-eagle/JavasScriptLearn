@@ -12,3 +12,15 @@ console.log(ordersSet.has("pasta"));
 //.delte function
 ordersSet.delete("pizza");
 console.log(ordersSet);
+
+for (const order of ordersSet) {
+  console.log(order);
+}
+
+console.log("-------------------");
+const staff = ["Waiter", "chef", "waiter", "Waiter"];
+const staffUnique = [...new Set(staff)];
+// const staffUnique = new Set(staff);
+console.log(staffUnique);
+
+console.log(new Set("jisglajklajfgklajdfklajljkjklkjdksj").size);
