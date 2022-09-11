@@ -52,3 +52,40 @@ const passengerCorrect =
   passengerLower[0].toUpperCase() + passengerLower.slice(1);
 console.log(passenger);
 console.log(passengerCorrect);
+
+//检查email内容是否一致
+const email = "hello@jonas.io";
+const loginEmail = " Hello@Jonas.Io \n";
+
+const checkEmail = function () {
+  const normalizedEmail = loginEmail.toLowerCase().trim();
+
+  if (email == normalizedEmail) {
+    console.log("邮箱内容正确！");
+  } else {
+    console.log("邮箱内容不正确");
+  }
+  console.log(`邮箱标准内容为：${normalizedEmail}`);
+};
+checkEmail(loginEmail);
+
+//替换功能
+const priceGB = "288,97&";
+const priceUS = priceGB.replace("&", "$").replaceAll(8, 1);
+
+console.log(priceUS);
+
+const announcement = "Every sen look at me";
+announcement.replace("sen", "body");
+console.log(announcement);
+console.log(announcement.replace("sen", "body"));
+
+// 使用正则表达式进行全部字段替换
+const replaceSpeak = announcement.replace(/e/g, "xxx");
+console.log(replaceSpeak);
+
+//检查子串是否属于字符串
+const newPlane = "Airbus A320neo";
+console.log(newPlane.includes("A32"));
+console.log(newPlane.startsWith("A32"));
+console.log(newPlane.startsWith("Air"));
