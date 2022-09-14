@@ -41,16 +41,10 @@ document.querySelector("button").addEventListener("click", function () {
 
   for (const [i, row] of rows.entries()) {
     const [first, second] = row.toLowerCase().trim().split("_");
-
     const output = `${first}${second.replace(
       second[0],
       second[0].toUpperCase()
     )}`;
-    console.log(`${output.padEnd(20)}${"✅".repeat(i + 1)}`);
+    console.log(`${output.padEnd(20)}${"🤦‍♂️".repeat(i + 1)}`);
   }
 });
-
-const row1 = row[0].split("_");
-const row1Out = row1[0] + row1[1];
-console.log();
-console.log();
