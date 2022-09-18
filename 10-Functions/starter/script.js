@@ -1,96 +1,97 @@
 "use strict";
+///////////////////////////////////////
+// Coding Challenge #1
 
-const bookings = [];
+/* 
+Let's build a simple poll app!
 
-const createBooking = function (
-  flightNum,
-  numPassengers = 1,
-  price = 199 * numPassengers
-) {
-  //ES5
-  // numPassengers=numPassengers||1;
-  // price=price||199;
+A poll has a question, an array of options from which people can choose, and an array with the number of replies for each option. This data is stored in the starter object below.
 
-  const booking = {
-    flightNum,
-    numPassengers,
-    price,
-  };
-  console.log(booking);
-  bookings.push(booking);
-};
+Here are your tasks:
 
-createBooking("sl123");
-createBooking("sl123", 3, 455);
-createBooking("sl123", undefined, 455);
+1. Create a method called 'registerNewAnswer' on the 'poll' object. The method does 2 things:
+  1.1. Display a prompt window for the user to input the number of the selected option. The prompt should look like this:
+        What is your favourite programming language?
+        0: JavaScript
+        1: Python
+        2: Rust
+        3: C++
+        (Write option number)
+  
+  1.2. Based on the input number, update the answers array. For example, if the option is 3, increase the value AT POSITION 3 of the array by 1. Make sure to check if the input is a number and if the number makes sense (e.g answer 52 wouldn't make sense, right?)
+2. Call this method whenever the user clicks the "Answer poll" button.
+3. Create a method 'displayResults' which displays the poll results. The method takes a string as an input (called 'type'), which can be either 'string' or 'array'. If type is 'array', simply display the results array as it is, using console.log(). This should be the default option. If type is 'string', display a string like "Poll results are 13, 2, 4, 1". 
+4. Run the 'displayResults' method at the end of each 'registerNewAnswer' method call.
 
-console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+HINT: Use many of the tools you learned about in this and the last section 😉
 
-const oneWord = function (str) {
-  return str.replace(/ /g, "").toLowerCase();
-};
+BONUS: Use the 'displayResults' method to display the 2 arrays in the test data. Use both the 'array' and the 'string' option. Do NOT put the arrays in the poll object! So what shoud the this keyword look like in this situation?
 
-const upperFirstWord = function (str) {
-  const [first, ...others] = str.split(" ");
-  return [first.toUpperCase(), ...others].join(" ");
-};
+BONUS TEST DATA 1: [5, 2, 3]
+BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 
-//Higher-order function
-const transformer = function (str, fn) {
-  console.log(`Original string: ${str}`);
-  console.log(`Transformed string:${fn(str)}`);
-  console.log(`Transformed by: ${fn.name}`);
-};
+GOOD LUCK 😀
+*/
 
-transformer("JavaScript is the best!", upperFirstWord);
-transformer("Now is the other function param!", oneWord);
+// ----------我的代码----------
+// let answer = [0, 0, 0, 0];
 
-const high5 = function () {
-  console.log("🤦‍♂️");
-};
-document.body.addEventListener("click", high5);
+// // 投票函数
+// const poll = function () {
+//   const input = Number(
+//     prompt(
+//       " What is your favourite programming language?\n0: JavaScript\n1: Python\n2: Rust\n3: C++\n(Write option number)"
+//     )
+//   );
 
-console.log("[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[");
-const greet = (greeting) => (name) => {
-  console.log(`${greeting}${name}`);
-};
+//   if (input === 0 || input === 1 || input === 2 || input === 3) {
+//     answer[input]++;
+//     console.log(answer);
+//   } else {
+//     return -1;
+//   }
+// };
 
-const greetHey = greet("Hey ");
-greetHey("you");
-greet("hello ")("everyBody");
+// // 展示函数
+// const displayResults = function (type) {};
 
-const normalGreet = function (greeting) {
-  return function (name) {
-    console.log(`new : ${greeting}${name}`);
-  };
-};
-const normal = normalGreet("nervous");
-normal(" me");
+// document.querySelector(".poll").addEventListener("click", poll);
 
-console.log("))))))))))))))))))))))))))))))))))))))))))00000");
-const lufthansa = {
-  airline: "Lufthansa",
-  iataCode: "LH",
-  bookings: [],
+const poll = {
+  question: "What is your favourite programming language?",
+  options: ["0,JavaScript", "1:Python", "2:Rust", "3:C++"],
+  answers: new Array(4).fill(0),
 
-  // book函数
-  book(flightNum, name) {
-    console.log(
-      `${name} booked a seat on ${this.airline} flight ${this.iataCode}`
+  // 收集新答案函数
+  registerNewAnswer() {
+    const answer = Number(
+      prompt(
+        `${this.question}\n${this.options.join("\n")}\n(Write option number)`
+      )
     );
-    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+
+    console.log(answer);
+
+    //登记答案
+    typeof answer == "number" &&
+      answer >= 0 &&
+      answer < this.answers.length &&
+      this.answers[answer]++;
+
+    this.displayResults();
+    this.displayResults("string");
+  },
+
+  // 显示结果
+  displayResults(type = "array") {
+    if (type === "array") {
+      console.log(this.answers);
+    } else if (type === "string") {
+      console.log(`Poll results are ${this.answers.join(",")}`);
+    }
   },
 };
 
-lufthansa.book(249, "John Schmedtmann");
-lufthansa.book(635, "John Smith");
-console.log(lufthansa);
-
-const eurowings = {
-  airline: "Eurowings",
-  iataCode: "EW",
-  bookings: [],
-};
-
-const book = lufthansa.book;
-book.call(eurowings, 23, "Sarah Williams");
+document
+  .querySelector(".poll")
+  .addEventListener("click", poll.registerNewAnswer.bind(poll));
