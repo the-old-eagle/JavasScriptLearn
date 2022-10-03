@@ -13,3 +13,7 @@ for (const mov of movements) {
   balance2 += mov;
 }
 console.log(balance2);
+
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+};
