@@ -1,22 +1,9 @@
-const age = 19;
-const isAvailible = (age > 18);
-if (isAvailible == true) {
-    console.log(`age:${age}
-    pass to get the driver`)
-}
+"use strict";
+const testAge1 = [5, 2, 4, 1, 15, 8, 3];
+const testAge2 = [16, 6, 10, 5, 6, 1, 4];
 
-const input = Number(prompt("please input a number:"));
-if (input === 23) {
-    console.log('23 is the right number!');
-} else {
-    console.log('the number which you input is incorret!');
-}
-
-console.log('--------------------------');
-const dolphinsScore1 = 96;
-const dolphinsScore2 = 108;
-const dolphinsScore3 = 89;
-
-const koalasScore1 = 109;
-const koalasScore
-const koalasScore
+const calcDogAgeAsHuman = function (arr) {
+  const humanAges = arr.map((mov) => (mov <= 2 ? 2 * mov : 16 + mov * 4));
+  console.log(humanAges);
+};
+calcDogAgeAsHuman(testAge1);
