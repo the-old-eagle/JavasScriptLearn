@@ -90,7 +90,6 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovements(account1.movements);
 console.log('-----------------------------------------');
 
 //reduce method test
@@ -107,8 +106,6 @@ const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${balance} EUR`;
 };
-
-calcDisplayBalance(account1.movements);
 
 const calcDisplaySummary = function (movements) {
   //展示收入
@@ -132,7 +129,6 @@ const calcDisplaySummary = function (movements) {
     .reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `${interest}€`;
 };
-calcDisplaySummary(account1.movements);
 //
 const eurToUsd = 1.1;
 const totalDepositUSD = movements
@@ -167,6 +163,22 @@ btnLogin.addEventListener('click', function (e) {
   console.log(currentAccount);
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
-    console.log('LOGIN');
+    // 展示界面ui和欢迎信息
+    labelWelcome.textContent = `Welcome back,${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 1;
+
+    // 显示账户明细
+    displayMovements(currentAccount.movements);
+
+    // 显示余额
+    calcDisplayBalance(currentAccount.movements);
+
+    // 显示总览
+    calcDisplaySummary(currentAccount.movements);
+
+    // 登录成功后清空输入信息
+    inputLoginPin.value = inputLoginUsername.value = '';
   }
 });
