@@ -107,21 +107,21 @@ const calcDisplayBalance = function (movements) {
   labelBalance.textContent = `${balance} EUR`;
 };
 
-const calcDisplaySummary = function (movements) {
+const calcDisplaySummary = function (acc) {
   //展示收入
-  const incomes = movements
+  const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `${incomes}€`;
   // 展示支出
-  const out = movements
+  const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumOut.textContent = `${Math.abs(out)}€`;
   // 展示利息
-  const interest = movements
+  const interest = acc.movements
     .filter(mov => mov > 0)
-    .map(deposit => (deposit * 1.2) / 100)
+    .map(deposit => (deposit * acc.interestRate) / 100)
     .filter((int, i, arr) => {
       console.log(arr);
       return int >= 1;
@@ -176,9 +176,20 @@ btnLogin.addEventListener('click', function (e) {
     calcDisplayBalance(currentAccount.movements);
 
     // 显示总览
-    calcDisplaySummary(currentAccount.movements);
+    calcDisplaySummary(currentAccount);
 
     // 登录成功后清空输入信息
     inputLoginPin.value = inputLoginUsername.value = '';
   }
+});
+// 转账功能
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const receiverAcc = accounts.find(acc=>acc.username===inputTransferTo.value);
+  const amount = Number(inputTransferAmount.value);
+
+  console.log(amount,receiverAcc);
+
+  if(amount>c)
+
 });
