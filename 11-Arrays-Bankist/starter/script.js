@@ -102,9 +102,9 @@ const balance = movements.reduce((prev, currValue) => prev + currValue, 0);
 
 console.log(balance);
 
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance} EUR`;
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${acc.balance} EUR`;
 };
 
 const calcDisplaySummary = function (acc) {
@@ -149,6 +149,17 @@ const creatUsername = function (accs) {
 };
 creatUsername(accounts);
 
+const updateUI = function (acc) {
+  // 显示账户明细
+  displayMovements(acc.movements);
+
+  // 显示余额
+  calcDisplayBalance(acc);
+
+  // 显示总览
+  calcDisplaySummary(acc);
+};
+
 //---------------------------------------
 //登录功能
 let currentAccount;
@@ -168,28 +179,48 @@ btnLogin.addEventListener('click', function (e) {
       currentAccount.owner.split(' ')[0]
     }`;
     containerApp.style.opacity = 1;
-
-    // 显示账户明细
-    displayMovements(currentAccount.movements);
-
-    // 显示余额
-    calcDisplayBalance(currentAccount.movements);
-
-    // 显示总览
-    calcDisplaySummary(currentAccount);
-
     // 登录成功后清空输入信息
     inputLoginPin.value = inputLoginUsername.value = '';
+    inputLoginPin.blur();
+
+    // 更新界面
+    updateUI(currentAccount);
   }
 });
 // 转账功能
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
-  const receiverAcc = accounts.find(acc=>acc.username===inputTransferTo.value);
+  const receiverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
   const amount = Number(inputTransferAmount.value);
 
-  console.log(amount,receiverAcc);
+  console.log(amount, receiverAcc);
+  inputTransferAmount.value = inputTransferTo.value = '';
 
-  if(amount>c)
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAccount.balance >= amount &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    console.log('transfer vaild');
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
 
+    // 更新界面
+    updateUI(currentAccount);
+  }
+});
+
+// 删除账户功能
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    inputClosePin.value === currentAccount.pin
+  ) {
+    console.log('delete');
+  }
+  console.log('faliid');
 });
