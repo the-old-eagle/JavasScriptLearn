@@ -213,14 +213,24 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
-// 删除账户功能
+// 删除当前登录的账户功能
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
   if (
     inputCloseUsername.value === currentAccount.username &&
-    inputClosePin.value === currentAccount.pin
+    Number(inputClosePin.value) === currentAccount.pin
   ) {
-    console.log('delete');
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+    console.log(index);
+
+    // 删除用户
+    accounts.splice(index, 1);
+
+    // 删除后隐藏UI
+    containerApp.style.opacity = 0;
+
+    inputClosePin.value = inputCloseUsername.value = '';
   }
-  console.log('faliid');
 });
