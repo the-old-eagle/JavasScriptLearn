@@ -234,3 +234,17 @@ btnClose.addEventListener('click', function (e) {
     inputClosePin.value = inputCloseUsername.value = '';
   }
 });
+
+// 排序方法
+console.log(movements);
+movements.sort((a, b) => {
+  if (a > b) {
+    return 1;
+  } //交换顺序
+
+  if (a < b) {
+    return -1;
+  } // 保持当前顺序
+});
+console.log('排序后');
+console.log(movements);
