@@ -74,10 +74,12 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
 
-  movements.forEach(function (mov, i) {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
   <div class="movements__row">
@@ -235,16 +237,24 @@ btnClose.addEventListener('click', function (e) {
   }
 });
 
-// 排序方法
-console.log(movements);
-movements.sort((a, b) => {
-  if (a > b) {
-    return 1;
-  } //交换顺序
+let sorted = false;
 
-  if (a < b) {
-    return -1;
-  } // 保持当前顺序
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
-console.log('排序后');
-console.log(movements);
+
+////////////////////////
+
+const arr = [1, 2, 3, 4, 5, 6, 7];
+console.log(new Array(1, 2));
+
+const x = new Array(7);
+
+x.fill(123, 2, 19);
+console.log(x);
+arr.fill(88, 2, 3);
+console.log(arr);
+const y = Array.from({ length: 7 }, (_, i) => i + 9);
+console.log(y);
