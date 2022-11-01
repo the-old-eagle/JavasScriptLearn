@@ -256,5 +256,14 @@ x.fill(123, 2, 19);
 console.log(x);
 arr.fill(88, 2, 3);
 console.log(arr);
-const y = Array.from({ length: 7 }, (_, i) => i + 9);
+const y = Array.from({ length: 7 }, (_, i) => i + 1);
 console.log(y);
+
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+
+  console.log(movementsUI);
+});
