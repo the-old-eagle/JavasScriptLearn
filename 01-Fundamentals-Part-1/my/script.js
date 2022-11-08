@@ -1,27 +1,49 @@
 "use strict";
 
-const bubbleSort = function () {
-  console.log("bubbleSort函数");
-};
+// coding challenge4
 
-const selectionSort = function () {
-  console.log("selectionSort函数");
-};
+const dogs = [
+  { weight: 22, curFood: 250, owners: ["Alice", "Bob"] },
+  { weight: 8, curFood: 200, owners: ["Matilda"] },
+  { weight: 13, curFood: 275, owners: ["Sarah", "John"] },
+  { weight: 32, curFood: 340, owners: ["Michael"] },
+];
 
-const quickSort = function () {
-  console.log("quickSort函数");
-};
+// 1.
+dogs.forEach((dog) => (dog.recFood = Math.trunc(dog.weight ** 0.75 * 28)));
 
-const functionsArray = new Map([
-  ["bubbleSort", bubbleSort],
-  ["selectionSort", selectionSort],
-  ["quickSort", quickSort],
-]);
+// 2.
+const dogSarah = dogs.find((dog) => dog.owners.includes("Sarah"));
+console.log(dogSarah);
+console.log(
+  `Sarah's dog is eating ${
+    dogSarah.curFood > dogSarah.recFood ? "too much" : "little"
+  }`
+);
 
-const input = prompt("请输入你想要调用的函数：");
+// 3.
+const ownersEatTooMuch = dogs
+  .filter((dog) => dog.curFood > dog.recFood)
+  .flatMap((dog) => dog.owners);
+// .flat();
+console.log(ownersEatTooMuch);
 
-if (functionsArray.has(input)) {
-  functionsArray.get(input)();
-} else {
-  console.log("输入的函数不存在！");
-}
+// 4.
+console.log(`${ownersEatTooMuch.join(" and ")} dogs eat too much!`);
+
+// 5.
+console.log(dogs.some((dog) => dog.curFood === dog.recFood));
+
+// 6.
+const checkEatingOkay = (dog) =>
+  dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1;
+
+console.log(dogs.some(checkEatingOkay));
+
+// 7.
+console.log(dogs.filter(checkEatingOkay));
+
+// 8.
+// 依据推荐食物比例进行升序排列
+const dogsSorted = dogs.slice().sort((a, b) => a.recFood - b.recFood);
+console.log(dogsSorted);
