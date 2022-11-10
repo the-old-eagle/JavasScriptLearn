@@ -252,3 +252,12 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+//create a date
+
+const now = new Date();
+console.log(now);
+
+console.log(new Date('Aug 02 2022 13:22:34'));
+console.log(new Date('Aug 02 2022'));
+console.log(new Date(account1.movementsDates[0]));
