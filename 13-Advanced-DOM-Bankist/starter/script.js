@@ -45,7 +45,7 @@ header.append(message);
 
 // Delete elements
 document
-  .querySelector('.btn--close-cookie')
+  .querySelector('.btn--close--cookie')
   .addEventListener('click', function () {
     // message.remove();
     message.parentElement.removeChild(message);
@@ -58,44 +58,51 @@ document
 message.style.backgroundColor = '#37383d';
 message.style.width = '120%';
 
-console.log(message.style.color);
-console.log(message.style.backgroundColor);
+// console.log(message.style.color);
+// console.log(message.style.backgroundColor);
 
-console.log(getComputedStyle(message).color);
-console.log(getComputedStyle(message).height);
+// console.log(getComputedStyle(message).color);
+// console.log(getComputedStyle(message).height);
 
 message.style.height =
   Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
 
-document.documentElement.style.setProperty('--color-primary', 'orangered');
+document.documentElement.style.setProperty('--color-primary', 'pink');
 
-// Attributes
-const logo = document.querySelector('.nav__logo');
-console.log(logo.alt);
-console.log(logo.className);
+//implementing Smooth Scrolling
 
-logo.alt = 'Beautiful minimalist logo';
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
-// Non-standard
-console.log(logo.designer);
-console.log(logo.getAttribute('designer'));
-logo.setAttribute('company', 'Bankist');
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
 
-console.log(logo.src);
-console.log(logo.getAttribute('src'));
+  console.log(e.target.getBoundingClientRect());
 
-const link = document.querySelector('.nav__link--btn');
-console.log(link.href);
-console.log(link.getAttribute('href'));
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
 
-// Data attributes
-console.log(logo.dataset.versionNumber);
+  console.log(
+    'height/width viewport:',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
 
-// Classes
-logo.classList.add('c', 'j');
-logo.classList.remove('c', 'j');
-logo.classList.toggle('c');
-logo.classList.contains('c'); // not includes
+  /* old ways
 
-// Don't use
-logo.clasName = 'jonas';
+   //   //Scrolling
+  //   window.scrollTo(
+  //     s1coords.left + window.pageXOffset,
+  //     s1coords.top + window.pageYOffset
+  //   );
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // }); 
+  
+  */
+
+  // section1.scrollIntoView({ behavior: 'smooth' });
+});
