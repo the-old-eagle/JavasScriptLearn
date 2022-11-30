@@ -56,6 +56,24 @@ tabsContainer.addEventListener('click', function (e) {
     .classList.add('operations__content--active');
 });
 
+//Menu fade animation
+const nav = document.querySelector('.nav');
+
+nav.addEventListener('mouseover', function (e) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav');
+    querySelectorAll('.nav__link');
+    const loge = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = 0.5;
+    });
+    loge.style.opacity = 0.5;
+  }
+});
+nav.addEventListener('mouseleave', function (e) {});
+
 // Page navigation
 
 // low efficient way
