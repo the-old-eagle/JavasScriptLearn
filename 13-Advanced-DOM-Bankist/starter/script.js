@@ -58,21 +58,26 @@ tabsContainer.addEventListener('click', function (e) {
 
 //Menu fade animation
 const nav = document.querySelector('.nav');
-
-nav.addEventListener('mouseover', function (e) {
+const handleHover = function (e, opacity) {
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
-    const siblings = link.closest('.nav');
-    querySelectorAll('.nav__link');
-    const loge = link.closest('.nav').querySelector('img');
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
 
     siblings.forEach(el => {
-      if (el !== link) el.style.opacity = 0.5;
+      if (el !== link) el.style.opacity = opacity;
     });
-    loge.style.opacity = 0.5;
+    logo.style.opacity = opacity;
   }
+};
+
+nav.addEventListener('mouseover', function (e) {
+  handleHover(e, 0.5);
 });
-nav.addEventListener('mouseleave', function (e) {});
+
+nav.addEventListener('mouseout', function (e) {
+  handleHover(e, 1);
+});
 
 // Page navigation
 
@@ -176,14 +181,14 @@ btnScrollTo.addEventListener('click', function (e) {
 });
 
 // Type of events and Event handlers
-const h1 = document.querySelector('h1');
+// const h1 = document.querySelector('h1');
 
-const alertH1 = function (e) {
-  alert('you trigger it!');
-};
+// const alertH1 = function (e) {
+//   alert('you trigger it!');
+// };
 
-h1.addEventListener('mouseenter', alertH1);
-setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 5000);
+// h1.addEventListener('mouseenter', alertH1);
+// setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 5000);
 // old ways
 // h1.onmouseenter = function () {
 //   alert('clicked!');
