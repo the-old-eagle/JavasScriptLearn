@@ -58,27 +58,76 @@ tabsContainer.addEventListener('click', function (e) {
 
 //Menu fade animation
 const nav = document.querySelector('.nav');
-const handleHover = function (e, opacity) {
+const handleHover = function (e) {
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
     const logo = link.closest('.nav').querySelector('img');
 
     siblings.forEach(el => {
-      if (el !== link) el.style.opacity = opacity;
+      if (el !== link) el.style.opacity = this;
     });
-    logo.style.opacity = opacity;
+    logo.style.opacity = this;
   }
 };
 
-nav.addEventListener('mouseover', function (e) {
-  handleHover(e, 0.5);
+//Passing "argument" into handler
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+
+nav.addEventListener('mouseout', handleHover.bind(1));
+
+//Sticky navigation
+const section1 = document.querySelector('#section--1');
+/* 
+
+const initalCoords = section1.getBoundingClientRect();
+console.log(initalCoords);
+
+window.addEventListener('scroll', function () {
+  console.log(window.scrollY);
+
+  if (window.scrollY > initalCoords.top) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+}); */
+
+//Sticky navigation:Intersection Observer API
+/* 
+const obsCallback = function (entries, observer) {
+  entries.forEach(entry => {
+    console.log(entries);
+  });
+};
+
+const obsOptions = {
+  root: null,
+  threshold: [0, 0.2],
+};
+
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(section1); 
+*/
+
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+
+const stickNav = function (entries) {
+  const [entry] = entries;
+  // console.log(entry);
+  if (!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+};
+
+const headerObserver = new IntersectionObserver(stickNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
 });
 
-nav.addEventListener('mouseout', function (e) {
-  handleHover(e, 1);
-});
+headerObserver.observe(header);
 
+//Reveal sections
+
+//////////////////////////////////////////////////
 // Page navigation
 
 // low efficient way
@@ -104,7 +153,6 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 });
 
 // Creating and inserting elements
-const header = document.querySelector('header');
 const message = document.createElement('div');
 message.classList.add('cookie-message');
 message.innerHTML =
@@ -145,7 +193,6 @@ document.documentElement.style.setProperty('--color-primary', 'pink');
 //implementing Smooth Scrolling
 
 const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
 
 btnScrollTo.addEventListener('click', function (e) {
   const s1coords = section1.getBoundingClientRect();
@@ -213,31 +260,31 @@ btnScrollTo.addEventListener('click', function (e) {
 //   console.log('Nav', e.target);
 // });
 
-// //DOM Traversing
-// // const h1=document.querySelector('h1')
+//DOM Traversing
+const h1 = document.querySelector('h1');
 
-// //Going downwards:child
-// console.log(h1.querySelectorAll('.highlight'));
-// console.log(h1.childNodes);
-// console.log(h1.children);
+//Going downwards:child
+/* console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.children); */
 
-// // Going upwards:parents
-// console.log(h1.parentNode);
-// console.log(h1.parentElement);
+// Going upwards:parents
+/* console.log(h1.parentNode);
+console.log(h1.parentElement); */
 
 // h1.closest('.header').style.background = 'var(--gradient-primary)';
 // h1.closest('h1').style.background = 'var(--gradient-secondary)';
 
-// // Going sideways:sublings
-// console.log(h1.previousElementSibling);
-// console.log(h1.nextElementSibling);
+// Going sideways:sublings
+/* console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
 
-// console.log(h1.previousSibling);
-// console.log(h1.nextSibling);
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
 
-// console.log(h1.parentElement.children);
-// [...h1.parentElement.children].forEach(function (el) {
-//   if (el != h1) {
-//     el.style.transform = 'scale(0.5)';
-//   }
-// });
+console.log(h1.parentElement.children);
+[...h1.parentElement.children].forEach(function (el) {
+  if (el != h1) {
+    el.style.transform = 'scale(0.5)';
+  }
+}); */
