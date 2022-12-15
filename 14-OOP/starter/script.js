@@ -151,10 +151,12 @@ class Account {
   // Public interface
   deposit(val) {
     this.#movements.push(val);
+    return this;
   }
 
   withdraw(val) {
     this.#movements.push(-val);
+    return this;
   }
 
   _approveLoan(val) {
@@ -166,6 +168,7 @@ class Account {
       this.deposit(val);
       console.log(`Loan approved`);
     }
+    return this;
   }
 }
 
