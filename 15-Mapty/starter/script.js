@@ -117,6 +117,12 @@ class App {
   _newWorkout(e) {
     e.preventDefault();
 
+    // Get data form form
+
+    // Check if data is valid
+
+    //If workout is running,create running object
+
     //Clear input fields
     inputDistance.value = inputDuration.value = inputCadence.value = '';
 
