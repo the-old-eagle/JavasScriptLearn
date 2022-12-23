@@ -124,9 +124,7 @@ class App {
       inputs.every(inp => Number.isFinite(inp));
     };
     const allPositive = (...inputs) => {
-      inputs.every(inp => {
-        inp > 0;
-      });
+      inputs.every(inp => inp > 0);
     };
 
     e.preventDefault();
